@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -16,15 +14,10 @@ public class Cliente extends Persona implements Serializable {
 
 	@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@NotNull
-	@NotBlank(message = "Seleccionar el tipo de cliente.")
+//	@NotBlank(message = "Seleccionar el tipo de cliente.")
 	@JoinColumn(name = "tipo_cliente")
 	private TipoCliente tipoCliente;
 
-	public Cliente(TipoCliente tipoCliente) {
-		super();
-		this.tipoCliente = tipoCliente;
-	}
 
 	public TipoCliente getTipoCliente() {
 		return tipoCliente;

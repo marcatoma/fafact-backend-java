@@ -1,5 +1,7 @@
 package com.fafact.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,11 @@ public class MarcaService {
 	@Transactional(readOnly = true)
 	public Marca ObtenerMarcaById(Long id) {
 		return marcaRepo.findById(id).orElse(null);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Marca> ListarTodasMarcas() {
+		return marcaRepo.findAll();
 	}
 
 	@Transactional(readOnly = true)

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -26,17 +27,14 @@ public abstract class Persona implements Serializable {
 	@Column(name = "id_persona")
 	private Long idPersona;
 
-	@NotNull
 	@NotBlank(message = "Nombre/Razon social requerido.")
 	private String nombreRazonSocial;
 
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@NotNull
-	@NotBlank(message = "Seleccionar un tipo de identificacion.")
+	@NotNull(message = "El tipo de identificacion no puede ser nulo")
 	private TipoIdentificacion tipoIdentificacion;
 
-	@NotNull
 	@NotBlank(message = "el numero de identificacion es requerido.")
 	@Column(unique = true)
 	private String identificacion;
@@ -53,7 +51,10 @@ public abstract class Persona implements Serializable {
 
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Ciudad ciudad;
+	@JoinColumn(name = "canton_id")
+	private Canton canton;
+
+	private Boolean estado;
 
 	public Long getIdPersona() {
 		return idPersona;
@@ -119,12 +120,20 @@ public abstract class Persona implements Serializable {
 		this.observacion = observacion;
 	}
 
-	public Ciudad getCiudad() {
-		return ciudad;
+	public Canton getCanton() {
+		return canton;
 	}
 
-	public void setCiudad(Ciudad ciudad) {
-		this.ciudad = ciudad;
+	public void setCanton(Canton canton) {
+		this.canton = canton;
+	}
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
 	}
 
 	private static final long serialVersionUID = 1L;

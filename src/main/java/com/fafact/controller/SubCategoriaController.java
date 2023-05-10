@@ -55,11 +55,15 @@ public class SubCategoriaController {
 
 	}
 
-	@GetMapping("listar")
-	public ResponseEntity<?> ObtenerTodasSubCategorias() {
+	@GetMapping("listar/id-categoria/{idcat}")
+	public ResponseEntity<?> ObtenerTodasSubCategorias(@PathVariable Long idcat) {
 		Map<String, Object> response = new HashMap<>();
+
+		if (idcat == null)
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+
 		try {
-			List<SubCategoria> subCategorias = subCategoriaService.ObtenerListaSubCategorias();
+			List<SubCategoria> subCategorias = subCategoriaService.ObtenerListaSubCategorias(idcat);
 			response.put("mensaje", "Lista de sub categorias obtenida.");
 			response.put("content", subCategorias);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);

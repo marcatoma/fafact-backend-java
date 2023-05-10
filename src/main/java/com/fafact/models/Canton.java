@@ -28,6 +28,10 @@ public class Canton implements Serializable {
 	@JoinColumn(name = "provincia_id")
 	private Provincia provincia;
 
+	public String getComposeCanton() {
+		return nombreCanton + " - " + provincia.getNombreProvincia();
+	}
+
 	public Long getIdCanton() {
 		return idCanton;
 	}

@@ -1,5 +1,7 @@
 package com.fafact.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,11 @@ public class CategoriaService {
 	@Transactional(readOnly = true)
 	public Categoria ObtenerCategoriaById(Long id) {
 		return categoriaRepo.findById(id).orElse(null);
+	}
+
+	@Transactional(readOnly = true)
+	public List<Categoria> ListarCategorias() {
+		return categoriaRepo.findAll();
 	}
 
 	@Transactional

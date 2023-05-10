@@ -1,5 +1,7 @@
 package com.fafact.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,11 @@ public class UnidadMedidaService {
 	@Transactional(readOnly = true)
 	public UnidadMedida ObtenerUnidadMedidaByID(Long id) {
 		return unidadMedidaRepo.findById(id).orElse(null);
+	}
+
+	@Transactional(readOnly = true)
+	public List<UnidadMedida> ListarTodasUnidadMedida() {
+		return unidadMedidaRepo.findAll();
 	}
 
 	@Transactional(readOnly = true)
@@ -44,7 +51,8 @@ public class UnidadMedidaService {
 	public boolean ValidarExistencia(UnidadMedida u) {
 		UnidadMedida rem = unidadMedidaRepo.findByDescripcionOrAbreviacionIgnoreCase(u.getDescripcion(),
 				u.getAbreviacion());
-		if (rem==null) return false;
+		if (rem == null)
+			return false;
 		return (rem.getIdUnidadMedida() == u.getIdUnidadMedida()) ? false : true;
 	}
 

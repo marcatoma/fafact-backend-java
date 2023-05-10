@@ -1,6 +1,7 @@
 package com.fafact.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -59,7 +60,7 @@ public class CategoriaController {
 	}
 
 	@GetMapping("listar/page/{page}/filas/{filas}")
-	public ResponseEntity<?> ObtenerTodasCategorias(@PathVariable int page, @PathVariable int filas,
+	public ResponseEntity<?> ObtenerTodasCategoriasPage(@PathVariable int page, @PathVariable int filas,
 			@RequestParam(required = false) String q) {
 		Map<String, Object> response = new HashMap<>();
 		try {
@@ -74,6 +75,23 @@ public class CategoriaController {
 			response.put("content", null);
 			response.put("error", e.getMostSpecificCause().getMessage());
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+
+	}
+
+	@GetMapping("listar")
+	public ResponseEntity<?> ObtenerTodasCategorias() {
+		Map<String, Object> response = new HashMap<>();
+		try {
+			List<Categoria> categorias = categoriaService.ListarCategorias();
+			response.put("mensaje", "lista de categorias obtenida.");
+			response.put("content", categorias);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Se a producido un error al obtener las categorias.");
+			response.put("content", null);
+			response.put("errror", e.getMostSpecificCause().getMessage());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		}
 
 	}

@@ -22,7 +22,7 @@ public class TipoClienteService {
 
 	@Transactional
 	public Long RegistrarTipoCliente(TipoCliente tipoCliente) {
-		return tipoClienteRepo.save(tipoCliente).getId();
+		return tipoClienteRepo.save(tipoCliente).getIdTipoCliente();
 	}
 
 	@Transactional(readOnly = true)

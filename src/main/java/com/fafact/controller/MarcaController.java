@@ -1,6 +1,7 @@
 package com.fafact.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -73,6 +74,22 @@ public class MarcaController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
 
+	}
+
+	@GetMapping("listar")
+	public ResponseEntity<?> ListarMarca() {
+		Map<String, Object> response = new HashMap<>();
+		try {
+			List<Marca> marca = marcaService.ListarTodasMarcas();
+			response.put("content", marca);
+			response.put("mensaje", "Lista de Marcas");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			response.put("content", null);
+			response.put("mensaje", "Lista de marcas no obtenida.");
+			response.put("error", e.getMostSpecificCause().getMessage());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@GetMapping("listar/page/{page}/filas/{filas}")

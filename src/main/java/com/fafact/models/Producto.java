@@ -59,7 +59,7 @@ public class Producto implements Serializable {
 	@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "categoria_id")
-	private Categoria categoria;
+	private SubCategoria subCategoria;
 
 	public Long getIdProducto() {
 		return idProducto;
@@ -149,12 +149,12 @@ public class Producto implements Serializable {
 		this.marca = marca;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
+	public SubCategoria getSubCategoria() {
+		return subCategoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setSubCategoria(SubCategoria subCategoria) {
+		this.subCategoria = subCategoria;
 	}
 
 	private static final long serialVersionUID = 1L;

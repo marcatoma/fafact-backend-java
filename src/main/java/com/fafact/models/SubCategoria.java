@@ -28,6 +28,8 @@ public class SubCategoria implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Categoria categoria;
 
+	private Boolean estado;
+
 	public Long getId_sub_categoria() {
 		return id_sub_categoria;
 	}
@@ -42,6 +44,14 @@ public class SubCategoria implements Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
 	}
 
 	public Categoria getCategoria() {

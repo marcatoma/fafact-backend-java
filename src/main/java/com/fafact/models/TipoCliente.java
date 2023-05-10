@@ -19,7 +19,7 @@ public class TipoCliente implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idTipoCliente;
 
 	@NotNull
 	@NotBlank(message = "El codigo es requerido.")
@@ -32,12 +32,12 @@ public class TipoCliente implements Serializable {
 
 	private String descripcion;
 
-	public Long getId() {
-		return id;
+	public Long getIdTipoCliente() {
+		return idTipoCliente;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdTipoCliente(Long idTipoCliente) {
+		this.idTipoCliente = idTipoCliente;
 	}
 
 	public String getCodigo() {

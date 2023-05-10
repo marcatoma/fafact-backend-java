@@ -26,8 +26,8 @@ public class SubCategoriaService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<SubCategoria> ObtenerListaSubCategorias() {
-		return iSubCategoriaRepo.findAll();
+	public List<SubCategoria> ObtenerListaSubCategorias(Long id) {
+		return iSubCategoriaRepo.findByParams(id);
 	}
 
 }
