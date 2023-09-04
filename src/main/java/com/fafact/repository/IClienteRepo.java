@@ -13,4 +13,5 @@ public interface IClienteRepo extends JpaRepository<Cliente, Long> {
 	public Page<Cliente> findByParams(Pageable pageable, String q);
 
 	public Cliente findByIdentificacion(String identificacion);
+	
 }

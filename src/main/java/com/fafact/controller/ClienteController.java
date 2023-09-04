@@ -96,4 +96,27 @@ public class ClienteController {
 		}
 	}
 
+	@GetMapping("listar/identificacion")
+	public ResponseEntity<?> ListarCliente(@RequestParam(required = false) String q) {
+		Map<String, Object> response = new HashMap<>();
+		try {
+			q = (q == null) ? "" : q;
+			Cliente clie = clienteService.ObtenerClienteByIdentifiacion(q);
+			if (clie == null) {
+				response.put("content", null);
+				response.put("mensaje", "Ciente no obtenida.");
+				response.put("error", "No encontrado.");
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+			}
+			response.put("content", clie);
+			response.put("mensaje", "Cliente obtenido");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			response.put("content", null);
+			response.put("mensaje", "Cliente no obtenido.");
+			response.put("error", e.getMostSpecificCause().getMessage());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+	}
+
 }

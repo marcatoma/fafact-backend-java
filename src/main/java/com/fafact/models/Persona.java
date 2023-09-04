@@ -12,6 +12,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 //@MappedSuperclass
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "persona")
 public abstract class Persona implements Serializable {
 
 	@Id

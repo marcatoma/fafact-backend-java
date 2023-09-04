@@ -12,6 +12,6 @@ public interface IProductoRepo extends JpaRepository<Producto, Long> {
 	@Query(value = "select * from producto p where ( LOWER(p.codigo) like %:q% or LOWER(p.codigo_aux) like %:q% or LOWER(p.descripcion) like %:q% or LOWER(p.nombre_producto) like %:q%)", nativeQuery = true)
 	public Page<Producto> findByParams(Pageable pageable, String q);
 
-	public Producto findByCodigoIgnoreCase(String nombreProducto);
+	public Producto findByCodigoIgnoreCase(String codigo);
 	
 }

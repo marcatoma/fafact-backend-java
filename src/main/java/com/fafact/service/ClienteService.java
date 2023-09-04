@@ -23,6 +23,11 @@ public class ClienteService {
 	}
 
 	@Transactional(readOnly = true)
+	public Cliente ObtenerClienteByIdentifiacion(String identificacion) {
+		return clienteRepo.findByIdentificacion(identificacion);
+	}
+
+	@Transactional(readOnly = true)
 	public List<Cliente> ListarTodosClientes() {
 		return clienteRepo.findAll();
 	}

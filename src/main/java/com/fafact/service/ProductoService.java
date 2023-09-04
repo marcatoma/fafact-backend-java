@@ -20,6 +20,11 @@ public class ProductoService {
 		return productoRepo.findById(id).orElse(null);
 	}
 
+	@Transactional(readOnly = true)
+	public Producto ObtenerProdcutoByCodigoProducto(String query) {
+		return productoRepo.findByCodigoIgnoreCase(query);
+	}
+
 	@Transactional
 	public Producto RegistrarProducto(Producto prod) {
 		return productoRepo.save(prod);
@@ -29,11 +34,12 @@ public class ProductoService {
 	public Page<Producto> ListarProductoParametro(Pageable pageable, String query) {
 		return productoRepo.findByParams(pageable, query.toLowerCase());
 	}
-	
+
 	@Transactional(readOnly = true)
 	public boolean ValidarExistencia(Producto prod) {
 		Producto producto = productoRepo.findByCodigoIgnoreCase(prod.getCodigo());
-		if (producto == null) return false;
+		if (producto == null)
+			return false;
 
 		return (producto.getIdProducto() == prod.getIdProducto()) ? false : true;
 	}
